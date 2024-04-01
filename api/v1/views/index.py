@@ -24,8 +24,6 @@ def stats():
         "State": "states"
     }
 
-    stats_data = {}
-    for model, table_name in models_available.items():
-        count = storage.count(table_name)
-        stats_data[model.lower() + "_count"] = count
-    return jsonify(stats_data)
+    for cls in models_available.keys():
+        stats[models_available[cls]] = storage.count(cls)
+    return jsonify(stats)
