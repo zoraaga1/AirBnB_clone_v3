@@ -18,7 +18,7 @@ def get_reviews(place_id):
     if place is None:
         abort(404)
     reviews = storage.all(Review).values()
-    place_reviews = [review for review in reviews if review.place_id == place_id]
+    place_reviews = [review for review in reviews if review.place_id == place_id]  # noqa
     return jsonify([review.to_dict() for review in place_reviews])
 
 
@@ -75,7 +75,7 @@ def update_review(review_id):
         abort(400, 'Not a JSON')
     data = request.json
     for key, value in data.items():
-        if key not in ['id', 'user_id', 'place_id', 'created_at', 'updated_at']:
+        if key not in ['id', 'user_id', 'place_id', 'created_at', 'updated_at']:  # noqa
             setattr(review, key, value)
     review.save()
     return jsonify(review.to_dict()), 200
