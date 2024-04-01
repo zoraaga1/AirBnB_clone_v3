@@ -4,7 +4,12 @@ Places module
 """
 
 from flask import Flask, jsonify, request, abort
-from models import storage, Place, City, User
+from models import storage
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.city import City
+from models.user import User
 from api.v1.views import app_views
 
 

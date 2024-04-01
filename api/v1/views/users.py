@@ -4,7 +4,8 @@ Users module
 """
 
 from flask import Flask, jsonify, request, abort
-from models import storage, User
+from models import storage
+from models.user import User
 from api.v1.views import app_views
 
 
