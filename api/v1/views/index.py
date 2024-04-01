@@ -11,12 +11,21 @@ def status():
     """Return status OK"""
     return jsonify({'status': 'OK'})
 
+
 @app_views.route('/stats')
 def stats():
     """Return the number of each object by type."""
+    models_available = {
+        "User": "users",
+        "Amenity": "amenities",
+        "City": "cities",
+        "Place": "places",
+        "Review": "reviews",
+        "State": "states"
+    }
+
     stats_data = {}
-    models = ["User", "State", "City", "Amenity", "Place", "Review"]
-    for model in models:
-        count = storage.count(model)
-        stats_data[model] = count
+    for model, table_name in models_available.items():
+        count = storage.count(table_name)
+        stats_data[model.lower() + "_count"] = count
     return jsonify(stats_data)
